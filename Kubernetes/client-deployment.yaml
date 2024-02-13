@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+      - name: client
+        image: bouncing_ball_client
+        imagePullPolicy: Never
+        env:
+        - name: SERVER_HOST
+          value: "server-service"  # Service name for server
+        - name: SERVER_PORT
+          value: "1234" # Default port
